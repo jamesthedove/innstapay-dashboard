@@ -80,6 +80,18 @@ export default {
   mounted () {
     this.loadBusinesses();
 
+
+  },
+  watch: {
+      '$route'(to, from) {
+          console.log(to)
+          if (to && !to.public){
+              const user = Util.getCurrentUser();
+              if (!user){
+                  this.$router.push('/login');
+              }
+          }
+      }
   },
 
   created () {
