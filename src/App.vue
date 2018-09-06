@@ -85,7 +85,7 @@ export default {
   watch: {
       '$route'(to, from) {
           console.log(to)
-          if (to && !to.public){
+          if (to && (!to.meta  || to.meta.public)){
               const user = Util.getCurrentUser();
               if (!user){
                   this.$router.push('/login');
