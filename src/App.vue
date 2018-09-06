@@ -85,11 +85,21 @@ export default {
   watch: {
       '$route'(to, from) {
           console.log(to)
-          if (to && (!to.meta  || to.meta.public)){
-              const user = Util.getCurrentUser();
-              if (!user){
-                  this.$router.push('/login');
+          if (to){
+              if (to.meta){
+                  if (!to.meta.public){
+                      const user = Util.getCurrentUser();
+                      if (!user){
+                          this.$router.push('/login');
+                      }
+                  }
+              } else {
+                  const user = Util.getCurrentUser();
+                  if (!user){
+                      this.$router.push('/login');
+                  }
               }
+
           }
       }
   },
