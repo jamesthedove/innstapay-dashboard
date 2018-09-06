@@ -53,13 +53,13 @@ export default {
     amount: function (newValue) {
       const result = newValue.replace(/\D/g, '')
         .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      Vue.nextTick(() =>{
-          this.amount = result
+      Vue.nextTick(() => {
+        this.amount = result;
       });
     },
-    dialog(value){
-      if (!value){
-          this.$emit('done');
+    dialog (value) {
+      if (!value) {
+        this.$emit('done');
       }
     }
   },
@@ -75,27 +75,27 @@ export default {
         this.loading = true;
         const amount = parseFloat(this.amount.replace(/,/g, ''));
         Innstapay.showPaymentDialog({
-            amount: amount,
-            key: 'pk_8a624b1c-d553-44f4-a5be-47219e45257e', //innstapay business public key
-            customer: {
-                email: Util.getCurrentUser().getEmail() //user email
-            },
-            onClose: () => {
-                this.loading = false;
-                this.dialog = false;
-            },
-            callback: async  (ref) => {
-                Util.toast('Completing Transaction');
-                try{
-                    this.completedMessage = await Parse.Cloud.run('businessFundAccount', {amount, ref, businessId: this.businessId});
-                }
-                catch(e){
-                    Util.toast(e.message, false);
-                }
-                this.loading = false;
-
+          amount: amount,
+          key: 'pk_8a624b1c-d553-44f4-a5be-47219e45257e', // innstapay business public key
+          customer: {
+            email: Util.getCurrentUser().getEmail() // user email
+          },
+          onClose: () => {
+            this.loading = false;
+            this.dialog = false;
+          },
+          callback: async (ref) => {
+            Util.toast('Completing Transaction');
+            try {
+              this.completedMessage = await Parse.Cloud.run('businessFundAccount', { amount, ref, businessId: this.businessId });
             }
-        })
+            catch (e) {
+              Util.toast(e.message, false);
+            }
+            this.loading = false;
+
+          }
+        });
       }
     }
   },

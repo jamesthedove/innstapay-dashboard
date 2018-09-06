@@ -58,18 +58,18 @@ export default {
   }),
   methods: {
     async add () {
-        if (this.$refs.form.validate()) {
-            try{
-                this.loading = true;
-                await Parse.Cloud.run('addBusinessUser', {email: this.email});
-                Util.toast('User has been added.');
-                this.$emit('done');
-            } catch(e){
-                this.loading = false;
-                Util.toast(e.message, false);
-            }
-
+      if (this.$refs.form.validate()) {
+        try {
+          this.loading = true;
+          await Parse.Cloud.run('addBusinessUser', { email: this.email });
+          Util.toast('User has been added.');
+          this.$emit('done');
+        } catch (e) {
+          this.loading = false;
+          Util.toast(e.message, false);
         }
+
+      }
     },
     close () {
       this.$emit('done');

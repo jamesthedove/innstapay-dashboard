@@ -73,33 +73,33 @@ export default {
     amount: function (newValue) {
       const result = newValue.replace(/\D/g, '')
         .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        Vue.nextTick(() =>{
-            this.amount = result
-        });
+      Vue.nextTick(() => {
+        this.amount = result;
+      });
     }
   },
   async mounted () {
     this.businessId = (await Util.getCurrentBusiness()).id;
   },
   methods: {
-    fileChanged(){
-        const file = this.$refs.file.files[0];
-        const fileName = 'bulk_upload.csv';
-        this.uploading = true;
-        const parseFile = new Parse.File(fileName, file);
-        parseFile.save().then(() => {
-            return Parse.Cloud.run('validateBulkTransfer', { file: parseFile, businessId: this.businessId });
-        }).then((res) => {
-            const totalAmount = res.amount;
-            const count = res.recipientsCount;
-            this.ref = res.ref;
+    fileChanged () {
+      const file = this.$refs.file.files[0];
+      const fileName = 'bulk_upload.csv';
+      this.uploading = true;
+      const parseFile = new Parse.File(fileName, file);
+      parseFile.save().then(() => {
+        return Parse.Cloud.run('validateBulkTransfer', { file: parseFile, businessId: this.businessId });
+      }).then((res) => {
+        const totalAmount = res.amount;
+        const count = res.recipientsCount;
+        this.ref = res.ref;
 
-            this.confirm = `Please Confirm the Transfer of ${Util.getCurrency()} ${totalAmount} to ${count} recipients. Total charges including transfer charges is ${Util.getCurrency()} ${res.amountWithCharge}`;
-        }).catch((e) => {
+        this.confirm = `Please Confirm the Transfer of ${Util.getCurrency()} ${totalAmount} to ${count} recipients. Total charges including transfer charges is ${Util.getCurrency()} ${res.amountWithCharge}`;
+      }).catch((e) => {
 
-        }).then(() => {
-            this.uploading = false;
-        });
+      }).then(() => {
+        this.uploading = false;
+      });
     },
     close () {
       this.$emit('done');

@@ -73,7 +73,7 @@ export default {
         this.loading = true;
 
         Parse.User.logOut().then(() => {
-            return Parse.Cloud.run('createUser', { email: this.email, password: this.password, firstName: this.firstName, lastName: this.lastName, phone: this.phone })
+          return Parse.Cloud.run('createUser', { email: this.email, password: this.password, firstName: this.firstName, lastName: this.lastName, phone: this.phone });
         }).then(() => {
           return Parse.User.logIn(this.email, this.password);
         }).then(() => {

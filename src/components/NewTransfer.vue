@@ -80,8 +80,8 @@ export default {
     amount: function (newValue) {
       const result = newValue.replace(/\D/g, '')
         .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      Vue.nextTick(() =>{
-          this.amount = result
+      Vue.nextTick(() => {
+        this.amount = result;
       });
     }
   },

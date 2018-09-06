@@ -122,13 +122,13 @@ export default {
       this.transactions = transactions;
     },
     async handleSearch () {
-      if (this.search){
-          this.loading = true;
-          const business = await Util.getCurrentBusiness();
-          const transaction = await business.getTransaction(this.search);
-          this.parseTransaction(transaction);
-          this.transactions = [transaction];
-          this.loading = false;
+      if (this.search) {
+        this.loading = true;
+        const business = await Util.getCurrentBusiness();
+        const transaction = await business.getTransaction(this.search);
+        this.parseTransaction(transaction);
+        this.transactions = [transaction];
+        this.loading = false;
       }
 
     }

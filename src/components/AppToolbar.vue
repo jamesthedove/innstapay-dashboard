@@ -68,12 +68,12 @@ export default {
           console.log(e);
           window.getApp.chooseBusiness = true;
         }
-      },{
+      }, {
         icon: 'add',
         href: '#',
         title: 'Create new business',
         click: (e) => {
-            window.getApp.$emit('APP_CREATE_BUSINESS');
+          window.getApp.$emit('APP_CREATE_BUSINESS');
         }
       },
       {
@@ -98,12 +98,12 @@ export default {
     toolbarColor () {
       return this.$vuetify.options.extra.mainNav;
     },
-    picture(){
+    picture () {
       const baseUrl = 'https://www.gravatar.com/avatar/';
-      return this.user!==null && `${baseUrl}${md5(this.user.get('email'))}`
+      return this.user !== null && `${baseUrl}${md5(this.user.get('email'))}`;
     }
   },
-  mounted(){
+  mounted () {
     this.user = Util.getCurrentUser();
   },
   methods: {

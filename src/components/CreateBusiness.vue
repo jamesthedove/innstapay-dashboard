@@ -16,7 +16,7 @@
                 <v-container grid-list-md>
                     <v-layout wrap>
                         <v-flex xs12>
-                            <v-text-field v-model="name"  label="Business Name" required></v-text-field>
+                            <v-text-field v-model="name" label="Business Name" required></v-text-field>
                         </v-flex>
                         <v-flex xs12>
                             <v-text-field v-model="email" label="Business Email" ></v-text-field>
@@ -69,10 +69,10 @@ export default {
       try {
         this.loading = true;
 
-        const res = await Parse.Cloud.run('createBusiness', {name: this.name, email: this.email, phone: this.phone, website: this.website, address: this.address});
+        const res = await Parse.Cloud.run('createBusiness', { name: this.name, email: this.email, phone: this.phone, website: this.website, address: this.address });
 
-        this.loading  = false;
-        Util.toast(res)
+        this.loading = false;
+        Util.toast(res);
         location.reload();
       }
       catch (e) {

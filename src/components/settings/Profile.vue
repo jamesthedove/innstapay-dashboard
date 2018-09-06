@@ -34,38 +34,38 @@ import Parse from 'parse';
 import moment from 'moment';
 import Util from '@/util';
 export default {
-    name: 'profile-settings',
-    data () {
-        return {
-            firstName: '',
-            lastName: '',
-            phone: '',
-            email: '',
-            loading: false,
+  name: 'profile-settings',
+  data () {
+    return {
+      firstName: '',
+      lastName: '',
+      phone: '',
+      email: '',
+      loading: false,
 
-        };
-    },
-    mounted () {
-        const user = Util.getCurrentUser();
-        this.firstName = user.get('firstName');
-        this.lastName = user.get('lastName');
-        this.phone = user.get('phone');
-        this.email = user.get('email');
-    },
-    methods: {
-        async update(){
-            this.loading = true;
-            try{
-                const response = await Parse.Cloud.run('updateUserProfile', {firstName: this.firstName, lastName: this.lastName, phone: this.phone, email: this.email});
-                Util.toast(response);
-                Parse.User.current().fetch();
-            } catch (e){
-                Util.toast(e.message, false);
-            }
-            finally {
-                this.loading  = false;
-            }
-        }
-    },
+    };
+  },
+  mounted () {
+    const user = Util.getCurrentUser();
+    this.firstName = user.get('firstName');
+    this.lastName = user.get('lastName');
+    this.phone = user.get('phone');
+    this.email = user.get('email');
+  },
+  methods: {
+    async update () {
+      this.loading = true;
+      try {
+        const response = await Parse.Cloud.run('updateUserProfile', { firstName: this.firstName, lastName: this.lastName, phone: this.phone, email: this.email });
+        Util.toast(response);
+        Parse.User.current().fetch();
+      } catch (e) {
+        Util.toast(e.message, false);
+      }
+      finally {
+        this.loading = false;
+      }
+    }
+  },
 };
 </script>

@@ -137,11 +137,11 @@ import ChatWindow from '@/components/chat/ChatWindow';
 import CircleStatistic from '@/components/widgets/statistic/CircleStatistic';
 import LinearStatistic from '@/components/widgets/statistic/LinearStatistic';
 import {
-    StackData,
-    SinData,
-    monthVisitData,
-    campaignData,
-    locationData,
+  StackData,
+  SinData,
+  monthVisitData,
+  campaignData,
+  locationData,
 } from '@/api/chart';
 export default {
   components: {
@@ -189,56 +189,56 @@ export default {
   async mounted () {
     const user = Util.getCurrentUser();
     const business = await Util.getCurrentBusiness();
-    if (business){
-        this.metrics = await business.getMetrics();
+    if (business) {
+      this.metrics = await business.getMetrics();
 
-        this.loading = false;
+      this.loading = false;
 
-        this.balance = await business.getBalance() || 0;
-        this.todayIncome = await business.getTodayIncome();
+      this.balance = await business.getBalance() || 0;
+      this.todayIncome = await business.getTodayIncome();
 
-        const oneMonthAgo = new Date();
-        oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
-        const income = await business.getIncome(oneMonthAgo);
-        let successfulTransactions = 0;
-        let failedTransactions = 0;
-        let abandonedTransactions = 0;
-        let totalTransactions = 0;
-        this.incomes = income.map((dayIncome) => {
-            successfulTransactions += dayIncome.get('successfulTransactions') || 0;
-            failedTransactions += dayIncome.get('failedTransactions') || 0;
-            abandonedTransactions += dayIncome.get('abandonedTransactions') || 0;
-            totalTransactions += dayIncome.get('totalTransactions') || 0;
-            return {
-                'day': moment(dayIncome.createdAt).format("MMM Do"),
-                'amount': dayIncome.get('amount')
+      const oneMonthAgo = new Date();
+      oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
+      const income = await business.getIncome(oneMonthAgo);
+      let successfulTransactions = 0;
+      let failedTransactions = 0;
+      let abandonedTransactions = 0;
+      let totalTransactions = 0;
+      this.incomes = income.map((dayIncome) => {
+        successfulTransactions += dayIncome.get('successfulTransactions') || 0;
+        failedTransactions += dayIncome.get('failedTransactions') || 0;
+        abandonedTransactions += dayIncome.get('abandonedTransactions') || 0;
+        totalTransactions += dayIncome.get('totalTransactions') || 0;
+        return {
+          'day': moment(dayIncome.createdAt).format('MMM Do'),
+          'amount': dayIncome.get('amount')
+        };
+      });
+
+
+      this.incomeData = {
+        successfulTransactions: {
+          percent: Math.round((successfulTransactions / totalTransactions || 0) * 100),
+          value: successfulTransactions
+        },
+        failedTransactions: {
+          percent: Math.round((failedTransactions / totalTransactions || 0) * 100),
+          value: failedTransactions
+        },
+        abandonedTransactions: {
+          percent: Math.round((abandonedTransactions / totalTransactions || 0) * 100),
+          value: abandonedTransactions
         }
-        });
+      };
 
-
-        this.incomeData = {
-          successfulTransactions: {
-              percent: Math.round((successfulTransactions/totalTransactions || 0) * 100),
-              value: successfulTransactions
-          },
-          failedTransactions: {
-                percent: Math.round((failedTransactions/totalTransactions || 0 ) * 100),
-                value: failedTransactions
-          },
-            abandonedTransactions: {
-                percent: Math.round((abandonedTransactions/totalTransactions || 0) * 100),
-                value: abandonedTransactions
-          }
-        };
-
-        console.log(this.incomes)
-        console.log(this.siteTrafficData);
-        business.onUpdated = (type, object) => {
-            console.log('onupdated');
-            if (type === 'metrics') {
-                this.metrics = object;
-            }
-        };
+      console.log(this.incomes);
+      console.log(this.siteTrafficData);
+      business.onUpdated = (type, object) => {
+        console.log('onupdated');
+        if (type === 'metrics') {
+          this.metrics = object;
+        }
+      };
     }
 
   },

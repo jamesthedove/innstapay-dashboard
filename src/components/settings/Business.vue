@@ -55,65 +55,65 @@ import Parse from 'parse';
 import moment from 'moment';
 import Util from '@/util';
 export default {
-    name: 'business-settings',
-    data () {
-        return {
-            pictureUrl: '',
-            name: '',
-            address: '',
-            phone: '',
-            website: '',
-            email: '',
-            supportEmail: '',
-            loading: false,
-            uploading: false,
-            business: null
+  name: 'business-settings',
+  data () {
+    return {
+      pictureUrl: '',
+      name: '',
+      address: '',
+      phone: '',
+      website: '',
+      email: '',
+      supportEmail: '',
+      loading: false,
+      uploading: false,
+      business: null
 
-        };
-    },
-    async mounted () {
-        const business = await Util.getCurrentBusiness();
-        this.business = business;
-        this.pictureUrl = business.getLogoUrl();
-        this.name = business.getName();
-        this.address = business.getAddress();
-        this.email = business.getEmail();
-        this.supportEmail = business.getSupportEmail();
-        this.website = business.getWebsite();
-        this.phone = business.getPhone();
-    },
-    methods: {
-        async uploadLogo(){
-            const file = this.$refs.file.files[0];
-            const fileName = file.name;
-            this.uploading = true;
-            const parseFile = new Parse.File(fileName, file);
+    };
+  },
+  async mounted () {
+    const business = await Util.getCurrentBusiness();
+    this.business = business;
+    this.pictureUrl = business.getLogoUrl();
+    this.name = business.getName();
+    this.address = business.getAddress();
+    this.email = business.getEmail();
+    this.supportEmail = business.getSupportEmail();
+    this.website = business.getWebsite();
+    this.phone = business.getPhone();
+  },
+  methods: {
+    async uploadLogo () {
+      const file = this.$refs.file.files[0];
+      const fileName = file.name;
+      this.uploading = true;
+      const parseFile = new Parse.File(fileName, file);
 
-            try{
-                await parseFile.save();
-                const res = await Parse.Cloud.run('updateBusinessProfile', { picture: parseFile, businessId: this.business.id });
-                this.pictureUrl = parseFile.url();
-                Util.toast(res);
-            } catch (e){
-                Util.toast(e.message, false);
-            } finally {
-                this.uploading = false;
-            }
+      try {
+        await parseFile.save();
+        const res = await Parse.Cloud.run('updateBusinessProfile', { picture: parseFile, businessId: this.business.id });
+        this.pictureUrl = parseFile.url();
+        Util.toast(res);
+      } catch (e) {
+        Util.toast(e.message, false);
+      } finally {
+        this.uploading = false;
+      }
 
-        },
-        async update(){
-            this.loading = true;
-            try{
-                const response = await Parse.Cloud.run('updateBusinessProfile',
-                    { businessId: this.business.id,name: this.name, address: this.address, phone: this.phone, email: this.email, supportEmail: this.supportEmail, website: this.website});
-                Util.toast(response);
-            } catch (e){
-                Util.toast(e.message, false);
-            }
-            finally {
-                this.loading  = false;
-            }
-        }
     },
+    async update () {
+      this.loading = true;
+      try {
+        const response = await Parse.Cloud.run('updateBusinessProfile',
+          { businessId: this.business.id, name: this.name, address: this.address, phone: this.phone, email: this.email, supportEmail: this.supportEmail, website: this.website });
+        Util.toast(response);
+      } catch (e) {
+        Util.toast(e.message, false);
+      }
+      finally {
+        this.loading = false;
+      }
+    }
+  },
 };
 </script>

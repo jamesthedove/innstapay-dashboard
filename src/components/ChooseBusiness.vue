@@ -56,13 +56,13 @@ export default {
     businesses: [],
   }),
   watch: {
-    dialog(value){
-      if (!value){
-          this.$emit('done');
+    dialog (value) {
+      if (!value) {
+        this.$emit('done');
       }
     }
   },
-  async mounted(){
+  async mounted () {
     const user = Util.getCurrentUser();
     this.businesses = await user.relation('businesses').query().find();
 
@@ -75,9 +75,9 @@ export default {
       this.$emit('done');
     },
     async switchToBusiness (business) {
-        await localforage.setItem('current_business', business.id);
-        this.dialog = false;
-        location.reload();
+      await localforage.setItem('current_business', business.id);
+      this.dialog = false;
+      location.reload();
     }
   },
 

@@ -76,19 +76,20 @@ import BusinessPreferences from '@/components/settings/Preferences';
 import ApiSettings from '@/components/settings/Api';
 import UserSettings from '@/components/settings/Users';
 export default {
-    components: {
-        UserSettings,
-        ApiSettings,
-        BusinessPreferences,
-        BusinessSettings,
-        ProfileSettings},
-    data () {
+  components: {
+    UserSettings,
+    ApiSettings,
+    BusinessPreferences,
+    BusinessSettings,
+    ProfileSettings 
+  },
+  data () {
     return {
-        active: null,
-        firstName: '',
-        lastName: '',
-        phone: '',
-        email: ''
+      active: null,
+      firstName: '',
+      lastName: '',
+      phone: '',
+      email: ''
 
     };
   },
@@ -100,7 +101,7 @@ export default {
     },
     next () {
       const active = parseInt(this.active);
-      this.active = (active < 2 ? active + 1 : 0)
+      this.active = (active < 2 ? active + 1 : 0);
     }
   },
 };

@@ -50,14 +50,14 @@ import AppFab from '@/components/AppFab';
 import PageHeader from '@/components/PageHeader';
 import menu from '@/api/menu';
 import AppEvents from  './event';
-import CreateBusiness from "@/components/CreateBusiness";
-import ChooseBusiness from "./components/ChooseBusiness";
+import CreateBusiness from '@/components/CreateBusiness';
+import ChooseBusiness from './components/ChooseBusiness';
 import Util from '@/util';
 export default {
   components: {
-      ChooseBusiness,
-      CreateBusiness,
-      AppDrawer,
+    ChooseBusiness,
+    CreateBusiness,
+    AppDrawer,
     AppToolbar,
     AppFab,
     PageHeader
@@ -77,7 +77,7 @@ export default {
   computed: {
 
   },
-  mounted (){
+  mounted () {
     this.loadBusinesses();
 
   },
@@ -87,31 +87,31 @@ export default {
       this.$on(item.name, item.callback);
     });
     document.addEventListener('toast_success', (e) => {
-        this.snackbar = {
-            show: true,
-            color: 'green',
-            text: e.detail
-        };
+      this.snackbar = {
+        show: true,
+        color: 'green',
+        text: e.detail
+      };
     }, false);
     document.addEventListener('toast_failure', (e) => {
-        this.snackbar = {
-            show: true,
-            color: 'red',
-            text: e.detail
-        };
+      this.snackbar = {
+        show: true,
+        color: 'red',
+        text: e.detail
+      };
     }, false);
     window.getApp = this;
   },
   methods: {
-    async loadBusinesses(){
-        try{
-            const business = await Util.getCurrentBusiness();
-            if (!business){
-                this.chooseBusiness = true;
-            }
-        } catch (e){
-
+    async loadBusinesses () {
+      try {
+        const business = await Util.getCurrentBusiness();
+        if (!business) {
+          this.chooseBusiness = true;
         }
+      } catch (e) {
+
+      }
     },
     openThemeSettings () {
       this.$vuetify.goTo(0);

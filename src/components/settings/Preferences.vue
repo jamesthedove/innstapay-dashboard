@@ -35,38 +35,38 @@ import Parse from 'parse';
 import moment from 'moment';
 import Util from '@/util';
 export default {
-    name: 'business-preferences',
-    data () {
-        return {
-            transactionEmails: true,
-            transactionEmailsCustomers: true,
-            settlements: 'auto',
-            loading: false,
-            business: null
+  name: 'business-preferences',
+  data () {
+    return {
+      transactionEmails: true,
+      transactionEmailsCustomers: true,
+      settlements: 'auto',
+      loading: false,
+      business: null
 
-        };
-    },
-    async mounted () {
-        const business = await Util.getCurrentBusiness();
-        this.business = business;
-        this.transactionEmails = business.get('sendTransactionEmails');
-        this.transactionEmailsCustomers = business.get('sendCustomersTransactionEmails');
-        this.settlements = business.get('settlements');
-    },
-    methods: {
-      async update(){
-          this.loading = true;
-          try{
-              const response = await Parse.Cloud.run('updateBusinessProfile',
-                  {businessId: this.business.id, updatePreferences: true, settlements: this.settlements, sendTransactionEmails: this.transactionEmails, sendCustomersTransactionEmails: this.transactionEmailsCustomers });
-              Util.toast(response);
-          } catch (e){
-              Util.toast(e.message, false);
-          }
-          finally {
-              this.loading  = false;
-          }
+    };
+  },
+  async mounted () {
+    const business = await Util.getCurrentBusiness();
+    this.business = business;
+    this.transactionEmails = business.get('sendTransactionEmails');
+    this.transactionEmailsCustomers = business.get('sendCustomersTransactionEmails');
+    this.settlements = business.get('settlements');
+  },
+  methods: {
+    async update () {
+      this.loading = true;
+      try {
+        const response = await Parse.Cloud.run('updateBusinessProfile',
+          { businessId: this.business.id, updatePreferences: true, settlements: this.settlements, sendTransactionEmails: this.transactionEmails, sendCustomersTransactionEmails: this.transactionEmailsCustomers });
+        Util.toast(response);
+      } catch (e) {
+        Util.toast(e.message, false);
       }
-    },
+      finally {
+        this.loading = false;
+      }
+    }
+  },
 };
 </script>

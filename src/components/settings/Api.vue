@@ -29,42 +29,42 @@ import Parse from 'parse';
 import moment from 'moment';
 import Util from '@/util';
 export default {
-    name: 'api-settings',
-    data () {
-        return {
-            publicKey: '',
-            privateKey: '',
-            webhook: '',
-            loading: true,
-            saving: false,
-            business: null
+  name: 'api-settings',
+  data () {
+    return {
+      publicKey: '',
+      privateKey: '',
+      webhook: '',
+      loading: true,
+      saving: false,
+      business: null
 
-        };
-    },
-    async mounted () {
-        const business = await Util.getCurrentBusiness();
-        this.business = business;
-        const apiKey = await business.getApiKey();
+    };
+  },
+  async mounted () {
+    const business = await Util.getCurrentBusiness();
+    this.business = business;
+    const apiKey = await business.getApiKey();
 
-        this.publicKey = apiKey.get('public');
-        this.privateKey = apiKey.get('private');
-        this.webhook = apiKey.get('webhook');
+    this.publicKey = apiKey.get('public');
+    this.privateKey = apiKey.get('private');
+    this.webhook = apiKey.get('webhook');
 
-        this.loading = false;
-    },
-    methods: {
-        async update(){
-            this.saving = true;
-            try{
-                const response = await Parse.Cloud.run('updateBusinessApi', {businessId: this.business.id, webhook: this.webhook});
-                Util.toast(response);
-            } catch (e){
-                Util.toast(e.message, false);
-            }
-            finally {
-                this.saving  = false;
-            }
-        }
-    },
+    this.loading = false;
+  },
+  methods: {
+    async update () {
+      this.saving = true;
+      try {
+        const response = await Parse.Cloud.run('updateBusinessApi', { businessId: this.business.id, webhook: this.webhook });
+        Util.toast(response);
+      } catch (e) {
+        Util.toast(e.message, false);
+      }
+      finally {
+        this.saving = false;
+      }
+    }
+  },
 };
 </script>
