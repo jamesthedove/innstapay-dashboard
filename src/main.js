@@ -17,7 +17,7 @@ import Truncate from 'lodash.truncate';
 Parse.initialize('innstapay');
 const liveUrl = 'https://api.innstapay.com/api';
 const localUrl = 'http://localhost:4667/api';
-Parse.serverURL = liveUrl;
+Parse.serverURL = localUrl;
 Parse.Object.registerSubclass('Business', Business);
 
 

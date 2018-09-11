@@ -4,11 +4,10 @@
 
             <v-layout wrap>
 
-                <v-flex xs6>
+                <v-flex xs12>
                     <p>How should you be paid?</p>
-
                 </v-flex>
-                <v-flex xs6>
+                <v-flex x12>
                     <v-radio-group v-model="settlements" :mandatory="false">
                         <v-radio label="Next day settlements" value="auto"></v-radio>
                         <v-radio label="Manual Settlements" value="manual"></v-radio>

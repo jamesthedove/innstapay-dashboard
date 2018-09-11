@@ -1,6 +1,6 @@
 <template>
     <div>
-        <add-business-user v-if="addUser"></add-business-user>
+        <add-business-user v-if="addUser" v-on:done="addUser = false"></add-business-user>
         <v-toolbar card color="white">
             <v-text-field
                     flat

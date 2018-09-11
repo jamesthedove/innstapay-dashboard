@@ -19,7 +19,7 @@
                 </v-form>
               </v-card-text>
                 <v-btn @keyup.enter="login" block color="primary" @click="login" :loading="loading">Login</v-btn>
-                <v-btn class="mt-3" :disabled="loading" @keyup.enter="login" block color="primary" @click="$router.push('/register')">Create an account</v-btn>
+                <v-btn v-if="!loading" class="mt-3" @keyup.enter="login" block color="primary" @click="$router.push('/register')">Create an account</v-btn>
             </v-card>
           </v-flex>
         </v-layout>

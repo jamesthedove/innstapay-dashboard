@@ -61,8 +61,10 @@ export default {
       if (this.$refs.form.validate()) {
         try {
           this.loading = true;
-          await Parse.Cloud.run('addBusinessUser', { email: this.email });
-          Util.toast('User has been added.');
+          const business = await Util.getCurrentBusiness();
+          console.log(business)
+          const response = await Parse.Cloud.run('addBusinessUser', { email: this.email, businessId: business.id, role: this.role });
+          Util.toast(response);
           this.$emit('done');
         } catch (e) {
           this.loading = false;

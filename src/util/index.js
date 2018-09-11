@@ -48,6 +48,16 @@ const randomElement = (arr = []) => {
   return arr[Math.floor(Math.random() * arr.length)];
 };
 
+const getParameterByName = (name, url) => {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, '\\$&');
+  const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+  const results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+};
+
 const kebab =  (str) => {
   return (str || '').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 };
@@ -102,5 +112,6 @@ export default {
   getCurrentUser,
   getCurrentBusiness,
   getCurrency,
+  getParameterByName,
   toast
 };

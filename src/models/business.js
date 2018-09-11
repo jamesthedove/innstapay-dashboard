@@ -67,6 +67,15 @@ class Business extends Parse.Object {
   async getApiKey () {
     return new Parse.Query('ApiKey').equalTo('business', this.getPointer()).first();
   }
+
+  async getBankAccount () {
+    const bankAccount = await new Parse.Query('BusinessBank').equalTo('business', this.getPointer()).notEqualTo('closed', true).first();
+    const bank = await new Parse.Query('Bank').equalTo('code', bankAccount.get('bankCode')).first();
+    bankAccount.bankName = bank.get('name');
+    return bankAccount;
+
+  }
+
   async getIncome (from, to) {
     const query = new Parse.Query('BusinessIncome').equalTo('business', this.getPointer()).descending('updatedAt').limit(1000);
     if (from) {
