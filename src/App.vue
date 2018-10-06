@@ -44,6 +44,7 @@
   </div>
 </template>
 <script>
+import Parse from 'parse';
 import AppDrawer from '@/components/AppDrawer';
 import AppToolbar from '@/components/AppToolbar';
 import AppFab from '@/components/AppFab';
@@ -123,6 +124,15 @@ export default {
       };
     }, false);
     window.getApp = this;
+    window.addEventListener('error', function (e) {
+      const error = e.error;
+      if (error.code && error.code === Parse.Error.INVALID_SESSION_TOKEN) {
+        Parse.User.logOut();
+        this.$router.replace({ path: '/login' });
+      } else {
+        console.error(error);
+      }
+    });
   },
   methods: {
     async loadBusinesses () {
