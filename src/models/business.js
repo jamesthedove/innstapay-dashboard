@@ -70,9 +70,12 @@ class Business extends Parse.Object {
 
   async getBankAccount () {
     const bankAccount = await new Parse.Query('BusinessBank').equalTo('business', this.getPointer()).notEqualTo('closed', true).first();
-    const bank = await new Parse.Query('Bank').equalTo('code', bankAccount.get('bankCode')).first();
-    bankAccount.bankName = bank.get('name');
-    return bankAccount;
+    if (bankAccount) {
+      const bank = await new Parse.Query('Bank').equalTo('code', bankAccount.get('bankCode')).first();
+      bankAccount.bankName = bank.get('name');
+      return bankAccount;
+    }
+
 
   }
 
