@@ -11,7 +11,7 @@
           <page-header v-if="$route.meta.breadcrumb"></page-header>
           <div class="page-wrapper">
             <router-view></router-view>
-          </div>   
+          </div>
            <!-- App Footer -->
           <v-footer height="auto" class="white pa-3 app--footer">
             <span class="caption">Innstapay &copy; 2018</span>
@@ -37,10 +37,10 @@
       v-model="snackbar.show"
     >
       {{ snackbar.text }}
-      <v-btn dark flat @click.native="snackbar.show = false" icon> 
+      <v-btn dark flat @click.native="snackbar.show = false" icon>
         <v-icon>close</v-icon>
       </v-btn>
-    </v-snackbar>    
+    </v-snackbar>
   </div>
 </template>
 <script>
@@ -124,7 +124,8 @@ export default {
       };
     }, false);
     window.getApp = this;
-    window.addEventListener('error', function (e) {
+    function handlePromiseError (e) {
+      console.log('error handled locally');
       const error = e.error;
       if (error.code && error.code === Parse.Error.INVALID_SESSION_TOKEN) {
         Parse.User.logOut();
@@ -132,6 +133,12 @@ export default {
       } else {
         console.error(error);
       }
+    }
+    window.addEventListener('error', function (e) {
+      handlePromiseError(e);
+    });
+    window.addEventListener('unhandledrejection', function (e) {
+      handlePromiseError(e);
     });
   },
   methods: {
@@ -160,7 +167,7 @@ export default {
 
 <style lang="stylus">
   .page-wrapper
-    min-height:calc(100vh - 64px - 50px - 81px );  
+    min-height:calc(100vh - 64px - 50px - 81px );
 
 
 </style>
