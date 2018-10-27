@@ -87,8 +87,8 @@ import moment from 'moment';
 import Util from '@/util';
 import AddBankAccount from '../AddBankAccount';
 export default {
-    components: {AddBankAccount},
-    name: 'business-settings',
+  name: 'business-settings',
+  components: { AddBankAccount },
   data () {
     return {
       pictureUrl: '',

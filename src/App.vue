@@ -78,31 +78,31 @@ export default {
   computed: {
 
   },
+  watch: {
+    '$route' (to, from) {
+      console.log(to);
+      if (to) {
+        if (to.meta) {
+          if (!to.meta.public) {
+            const user = Util.getCurrentUser();
+            if (!user) {
+              this.$router.push('/login');
+            }
+          }
+        } else {
+          const user = Util.getCurrentUser();
+          if (!user) {
+            this.$router.push('/login');
+          }
+        }
+
+      }
+    }
+  },
   mounted () {
     this.loadBusinesses();
 
 
-  },
-  watch: {
-      '$route'(to, from) {
-          console.log(to)
-          if (to){
-              if (to.meta){
-                  if (!to.meta.public){
-                      const user = Util.getCurrentUser();
-                      if (!user){
-                          this.$router.push('/login');
-                      }
-                  }
-              } else {
-                  const user = Util.getCurrentUser();
-                  if (!user){
-                      this.$router.push('/login');
-                  }
-              }
-
-          }
-      }
   },
 
   created () {
@@ -125,8 +125,7 @@ export default {
     }, false);
     window.getApp = this;
     function handlePromiseError (e) {
-      console.log('error handled locally');
-      const error = e.error;
+      const error = e.reason || e.error;
       if (error.code && error.code === Parse.Error.INVALID_SESSION_TOKEN) {
         Parse.User.logOut();
         this.$router.replace({ path: '/login' });
@@ -134,10 +133,9 @@ export default {
         console.error(error);
       }
     }
-    window.addEventListener('error', function (e) {
-      handlePromiseError(e);
-    });
     window.addEventListener('unhandledrejection', function (e) {
+      console.log('promise error handled locally');
+      console.log(e);
       handlePromiseError(e);
     });
   },

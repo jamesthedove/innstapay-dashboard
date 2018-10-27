@@ -70,13 +70,13 @@ export default {
       this.error = null;
     }
   },
-  mounted(){
+  mounted () {
     const token = Util.getParameterByName('it');
     const email = Util.getParameterByName('e');
 
-    if (token && email){
-        this.token = token;
-        this.email = email;
+    if (token && email) {
+      this.token = token;
+      this.email = email;
     }
   },
   methods: {

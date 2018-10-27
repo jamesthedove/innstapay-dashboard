@@ -62,7 +62,7 @@ export default {
         try {
           this.loading = true;
           const business = await Util.getCurrentBusiness();
-          console.log(business)
+          console.log(business);
           const response = await Parse.Cloud.run('addBusinessUser', { email: this.email, businessId: business.id, role: this.role });
           Util.toast(response);
           this.$emit('done');
