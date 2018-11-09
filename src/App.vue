@@ -124,7 +124,7 @@ export default {
       };
     }, false);
     window.getApp = this;
-    function handlePromiseError (e) {
+    const handlePromiseError =  e => {
       const error = e.reason || e.error;
       if (error.code && error.code === Parse.Error.INVALID_SESSION_TOKEN) {
         Parse.User.logOut();
