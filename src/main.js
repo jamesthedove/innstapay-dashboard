@@ -20,10 +20,10 @@ const testUrl = 'https://api-test.innstapay.com/api';
 const localUrl = 'http://localhost:4667/api';
 
 const hostname = window.location.hostname;
-console.log(hostname)
-if (hostname === 'checkout.innstapay.com') {
+console.log(hostname);
+if (hostname === 'dashboard.innstapay.com') {
   Parse.serverURL = liveUrl;
-} else if (hostname === 'checkout-test.innstapay.com') {
+} else if (hostname === 'dashboard-test.innstapay.com') {
   Parse.serverURL = testUrl;
 } else {
   Parse.serverURL = localUrl;
