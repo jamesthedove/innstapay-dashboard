@@ -8,7 +8,7 @@ export default [
     redirect: {
       path: '/404'
     }
-  },  
+  },
   {
     path: '/404',
     meta: {
@@ -109,6 +109,16 @@ export default [
       `@/pages/Income.vue`
     )
   },
+  {
+    path: '/balance/history',
+    meta: { breadcrumb: true },
+    name: 'BalanceHistory',
+    component: () => import(
+      /* webpackChunkName: "routes" */
+      /* webpackMode: "lazy-once" */
+      `@/pages/BalanceHistory.vue`
+    )
+  },
 
   {
     path: '/transfers',
@@ -162,7 +172,7 @@ export default [
       /* webpackMode: "lazy-once" */
       `@/pages/Media.vue`
     )
-  },  
+  },
   {
     path: '/chat',
     meta: {
@@ -189,8 +199,8 @@ export default [
             /* webpackChunkName: "routes" */
             /* webpackMode: "lazy-once" */
             `@/components/chat/ChatMessaging.vue`
-          ),  
-        }   
+          ),
+        }
       },
       {
         path: '/chat/contact/:uuid?',
@@ -203,12 +213,12 @@ export default [
             /* webpackChunkName: "routes" */
             /* webpackMode: "lazy-once" */
             `@/components/chat/ChatContact.vue`
-          ),  
+          ),
 
-        }     
-      }             
+        }
+      }
     ]
-  },    
+  },
   {
     path: '/mail',
     meta: {
@@ -234,7 +244,7 @@ export default [
           /* webpackChunkName: "routes" */
           /* webpackMode: "lazy-once" */
           `@/components/email/List.vue`
-        ),        
+        ),
       },
       {
         path: '/mail/0/:uuid',
@@ -246,10 +256,10 @@ export default [
           /* webpackChunkName: "routes" */
           /* webpackMode: "lazy-once" */
           `@/components/email/Reply.vue`
-        ),        
-      }      
+        ),
+      }
     ]
-  },  
+  },
   {
     path: '/components/alert',
     meta: { breadcrumb: true },

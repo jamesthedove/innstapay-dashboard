@@ -79,8 +79,12 @@ class Business extends Parse.Object {
 
   }
 
-  async getIncome (from, to) {
-    const query = new Parse.Query('BusinessIncome').equalTo('business', this.getPointer()).descending('updatedAt').limit(1000);
+  async getIncome (from, to, getAll) {
+    const query = new Parse.Query('BusinessBalanceUpdate').equalTo('business', this.getPointer()).descending('updatedAt').limit(1000);
+
+    if (!getAll) {
+      query.equalTo('action', 'credit');
+    }
     if (from) {
       query.greaterThan('createdAt', from);
     }

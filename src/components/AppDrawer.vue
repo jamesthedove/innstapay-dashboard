@@ -11,8 +11,8 @@
     <v-toolbar color="primary darken-1" dark>
       <img v-bind:src="computeLogo" height="36" alt="Innstapay">
       <v-toolbar-title class="ml-0 pl-3">
-        <span class="hidden-sm-and-down">Innstapay</span>
-      </v-toolbar-title>        
+        <span>Innstapay</span>
+      </v-toolbar-title>
     </v-toolbar>
     <vue-perfect-scrollbar class="drawer-menu--scroll" :settings="scrollSettings">
       <v-list dense expand>
@@ -53,7 +53,7 @@
             <v-subheader v-else-if="item.header" :key="i">{{ item.header }}</v-subheader>
             <v-divider v-else-if="item.divider" :key="i"></v-divider>
             <!--top-level link-->
-            <v-list-tile v-else :to="!item.href ? { name: item.name } : null" :href="item.href" ripple="ripple" :disabled="item.disabled" :target="item.target" rel="noopener" :key="item.name">
+            <v-list-tile v-else :to="!item.href ? { name: item.name, query: item.query } : null" :href="item.href" ripple="ripple" :disabled="item.disabled" :target="item.target" rel="noopener" :key="item.name">
               <v-list-tile-action v-if="item.icon">
                 <v-icon>{{ item.icon }}</v-icon>
               </v-list-tile-action>
@@ -67,8 +67,8 @@
               <!-- <v-circle class="caption blue lighten-2 white--text mx-0" v-else-if="item.chip" label="label" small="small">{{ item.chip }}</v-circle> -->
             </v-list-tile>
         </template>
-      </v-list>        
-    </vue-perfect-scrollbar>        
+      </v-list>
+    </vue-perfect-scrollbar>
   </v-navigation-drawer>
 </template>
 <script>
@@ -91,7 +91,7 @@ export default {
     menus: menu,
     scrollSettings: {
       maxScrollbarLength: 160
-    }    
+    }
   }),
   computed: {
     computeGroupActive () {
@@ -103,14 +103,14 @@ export default {
 
     sideToolbarColor () {
       return this.$vuetify.options.extra.sideNav;
-    }    
+    }
   },
   created () {
     window.getApp.$on('APP_DRAWER_TOGGLED', () => {
       this.drawer = (!this.drawer);
     });
   },
-  
+
 
   methods: {
     genChildTarget (item, subItem) {

@@ -1,5 +1,5 @@
 <template>
-  <income :incomes="incomes" :loading="loading"></income>
+  <income :incomes="incomes" :loading="loading" :showAction="true"></income>
 </template>
 
 <script>
@@ -20,13 +20,14 @@ export default {
   methods: {
     async load () {
       const business = await Util.getCurrentBusiness();
-      const incomes = await business.getIncome();
+      const incomes = await business.getIncome(null, null, true);
       incomes.forEach((income) => {
         income.reference = income.id;
         const currency = income.get('currency') || 'NGN';
         income.amount = `${currency} ${income.get('amount')}`;
         income.date = moment(income.updatedAt).format('dddd, MMMM Do YYYY, h:mm a');
         income.desc = income.get('reason');
+        income.action = income.get('action');
       });
       this.loading = false;
       this.incomes = incomes;

@@ -8,8 +8,8 @@
               <v-card-text>
                 <div class="layout column align-center">
                   <img src="/static/m.png" alt="Vue Material Admin" width="120" height="120">
-                  <h1 class="flex my-4 primary--text">Innstapay Dashboard</h1>
-                </div>                
+                  <h4 class="flex my-4 primary--text">Innstapay Dashboard</h4>
+                </div>
                 <v-form>
                   <v-alert outline color="error" icon="warning" :value="error">
                     {{error}}

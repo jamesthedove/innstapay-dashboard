@@ -86,18 +86,29 @@ const getCurrentUser = () => {
 
 const getCurrentBusiness = async () => {
   const businesses = await getCurrentUser().relation('businesses').query().find();
+  const singleBusiness = businesses.length === 1;
   if (businesses.length === 0) {
     // user is not attached to any business
     return null;
   }
+
+  if (singleBusiness) {
+    return businesses[0];
+  }
   const currentBusinessId = await localforage.getItem('current_business');
   if (currentBusinessId) {
-    return businesses.find((business) => business.id === currentBusinessId);
+    const business = businesses.find((business) => business.id === currentBusinessId);
+    if (business) {
+      return business;
+    } else {
+      // business not found
+      return null;
+    }
   } else {
     // choose first business
     const business = businesses[0];
     await localforage.setItem('current_business', business.id);
-    return business[0];
+    return business;
   }
 };
 

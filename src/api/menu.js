@@ -16,6 +16,11 @@ const Menu =  [
     icon: 'fa fa-arrow-down',
     name: 'Income',
   }, {
+    title: 'Balance History',
+    group: 'apps',
+    icon: 'fa fa-arrow-down',
+    name: 'BalanceHistory'
+  }, {
     title: 'Transfers',
     group: 'apps',
     icon: 'trending_flat',
