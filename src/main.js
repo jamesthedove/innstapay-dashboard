@@ -8,7 +8,7 @@ import App from './App';
 import Vuetify from 'vuetify';
 import Parse from 'parse';
 import router from './router';
-import 'font-awesome/css/font-awesome.css';  
+import 'font-awesome/css/font-awesome.css';
 import './theme/default.styl';
 import VeeValidate from 'vee-validate';
 import colors from 'vuetify/es5/util/colors';
@@ -16,8 +16,19 @@ import Truncate from 'lodash.truncate';
 
 Parse.initialize('innstapay');
 const liveUrl = 'https://api.innstapay.com/api';
+const testUrl = 'https://api-test.innstapay.com/api';
 const localUrl = 'http://localhost:4667/api';
-Parse.serverURL = liveUrl;
+
+const hostname = window.location.hostname;
+console.log(hostname)
+if (hostname === 'checkout.innstapay.com') {
+  Parse.serverURL = liveUrl;
+} else if (hostname === 'checkout-test.innstapay.com') {
+  Parse.serverURL = testUrl;
+} else {
+  Parse.serverURL = localUrl;
+}
+
 Parse.Object.registerSubclass('Business', Business);
 
 
