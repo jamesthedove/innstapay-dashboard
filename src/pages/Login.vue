@@ -53,7 +53,9 @@ export default {
         window.getApp.$emit('APP_LOGIN_SUCCESS');
       }).catch((e) => {
         this.loading = false;
-        this.error = e.message;
+        if (e.code === Parse.Error.CONNECTION_FAILED) {
+          this.error = 'Connection Failed! Could not reach server';
+        }
       });
     }
   }
