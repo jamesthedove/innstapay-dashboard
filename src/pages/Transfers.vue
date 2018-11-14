@@ -33,7 +33,6 @@
             :search="search"
             class="elevation-1"
           >
-            <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
             <template slot="items" slot-scope="props">
               <td>
                 <v-tooltip v-if="props.item.status === 'successful'" bottom>

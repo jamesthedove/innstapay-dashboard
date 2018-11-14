@@ -55,6 +55,8 @@ export default {
         this.loading = false;
         if (e.code === Parse.Error.CONNECTION_FAILED) {
           this.error = 'Connection Failed! Could not reach server';
+        } else {
+          this.error = e.message;
         }
       });
     }
