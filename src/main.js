@@ -26,7 +26,7 @@ if (hostname === 'dashboard.innstapay.com') {
 } else if (hostname === 'dashboard-test.innstapay.com') {
   Parse.serverURL = testUrl;
 } else {
-  Parse.serverURL = localUrl;
+  Parse.serverURL = testUrl;
 }
 
 Parse.Object.registerSubclass('Business', Business);

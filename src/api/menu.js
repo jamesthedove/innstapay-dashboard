@@ -35,6 +35,11 @@ const Menu =  [
     group: 'apps',
     icon: 'settings',
     name: 'Settings'
+  }, {
+    title: 'Payment Pages',
+    group: 'apps',
+    icon: 'receipt',
+    name: 'PaymentPages'
   }
   // {
   //   title: 'Widgets',

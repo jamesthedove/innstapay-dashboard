@@ -132,6 +132,17 @@ export default [
   },
 
   {
+    path: '/pages',
+    meta: { breadcrumb: true },
+    name: 'PaymentPages',
+    component: () => import(
+      /* webpackChunkName: "routes" */
+      /* webpackMode: "lazy-once" */
+      `@/pages/PaymentPages.vue`
+    )
+  },
+
+  {
     path: '/settings',
     meta: { breadcrumb: true },
     name: 'Settings',
