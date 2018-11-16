@@ -20,6 +20,9 @@
                     <v-btn @click="update" :loading="saving" color="success" flat>Save Changes</v-btn>
                 </div>
             </v-layout>
+            <v-flex class="text-xs-center">
+                <a style="text-decoration: none" target="_blank" href="https://developers.innstapay.com">View Developers Documentation</a>
+            </v-flex>
         </v-card-text>
     </v-card>
 </template>
