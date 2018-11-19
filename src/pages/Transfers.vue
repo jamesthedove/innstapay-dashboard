@@ -1,8 +1,8 @@
 <template>
   <div id="pageTable">
-    <new-transfer v-if="transferDialog" v-on:done="transferDialog = false"></new-transfer>
-    <bulk-transfer v-if="bulkTransferDialog" v-on:done="bulkTransferDialog = false"></bulk-transfer>
-    <fund-account v-if="fundAccountDialog" v-on:done="fundAccountDialog = false"></fund-account>
+    <new-transfer v-if="transferDialog" v-on:done="load"></new-transfer>
+    <bulk-transfer v-if="bulkTransferDialog" v-on:done="load"></bulk-transfer>
+    <fund-account v-if="fundAccountDialog" v-on:done="load"></fund-account>
     <v-btn color="success" @click="transferDialog = true" outline="">New Single Transfer</v-btn>
     <v-btn color="success" @click="bulkTransferDialog = true" outline="">New Bulk Transfer</v-btn>
     <v-btn color="success" @click="fundAccountDialog = true" outline="">Fund Account</v-btn>
@@ -94,6 +94,9 @@ export default {
   },
   methods: {
     async load () {
+      this.transferDialog = false;
+      this.bulkTransferDialog = false;
+      this.fundAccountDialog = false;
       const business = await Util.getCurrentBusiness();
       const transfers = await business.getBankTransfers();
       transfers.forEach((transfer) => {

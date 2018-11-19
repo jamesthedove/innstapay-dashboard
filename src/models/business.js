@@ -98,7 +98,7 @@ class Business extends Parse.Object {
   }
 
   async getPaymentPages () {
-    return new Parse.Query('BusinessPaymentPage').equalTo('business', this.getPointer()).descending('updatedAt').limit().find();
+    return new Parse.Query('BusinessPaymentPage').equalTo('business', this.getPointer()).descending('updatedAt').limit(100).find();
   }
 
   async getCustomers () {

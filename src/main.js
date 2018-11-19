@@ -23,9 +23,12 @@ const hostname = window.location.hostname;
 console.log(hostname);
 if (hostname === 'dashboard.innstapay.com') {
   Parse.serverURL = liveUrl;
+  Parse.checkoutURL = 'https://checkout.innstapay.com/pay/';
 } else if (hostname === 'dashboard-test.innstapay.com') {
   Parse.serverURL = testUrl;
+  Parse.checkoutURL = 'https://checkout-test.innstapay.com/pay/';
 } else {
+  Parse.checkoutURL = 'https://checkout-test.innstapay.com/pay/';
   Parse.serverURL = testUrl;
 }
 

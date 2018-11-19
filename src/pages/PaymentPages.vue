@@ -1,6 +1,6 @@
 <template>
   <div id="pageTable">
-    <new-payment-page v-if="dialog" v-on:done="dialog = false"></new-payment-page>
+    <new-payment-page v-if="dialog" v-on:done="load"></new-payment-page>
     <v-btn color="success" @click="dialog = true" outline="">Create Payment Page</v-btn>
 
     <v-container grid-list-xl fluid>
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import Parse from 'parse';
 import Util from '@/util';
 import BulkTransfer from '@/components/BulkTransfer';
 import FundAccount from '@/components/FundAccount';
@@ -53,6 +54,10 @@ export default {
       loading: true,
       headers: [
         {
+          text: 'Status',
+          sortable: false,
+          value: 'status'
+        }, {
           text: 'Path',
           sortable: false,
           value: 'path'
@@ -68,10 +73,11 @@ export default {
   },
   methods: {
     async load () {
+      this.dialog = false;
       const business = await Util.getCurrentBusiness();
       const pages = await business.getPaymentPages();
       pages.forEach((page) => {
-        page.path = page.get('path');
+        page.path = Parse.checkoutURL + page.get('path');
         page.amount = page.get('amount');
         page.desc = page.get('notes');
         page.active = page.get('active');

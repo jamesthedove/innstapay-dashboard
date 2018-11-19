@@ -17,13 +17,14 @@
                         <v-flex class="text-xs-center">
                             <v-icon color="green" x-large>check</v-icon>
                             <h3>{{completedMessage}}</h3>
+                            <a target="_blank" :href="pageUrl">{{pageUrl}}</a>
                         </v-flex>
 
                 </template>
                 <v-container v-else grid-list-md>
                     <v-layout wrap>
                         <v-flex xs12>
-                            <v-text-field v-model="name" label="Account Name"></v-text-field>
+                            <v-text-field :hint="hintText" v-model="name" maxlength="20" label="Name (No spaces)"></v-text-field>
                         </v-flex>
                         <v-flex xs12>
                             <v-text-field v-model="amount" label="Amount (NGN)"></v-text-field>
@@ -57,10 +58,19 @@ export default {
     description: '',
     businessId: '',
     dialog: true,
+    pageUrl: '',
     completedMessage: '',
     loading: false,
     error: ''
   }),
+  computed: {
+    hintText () {
+      if (this.name) {
+        this.pageUrl = Parse.checkoutURL + this.name;
+        return `Your page will be at ${this.pageUrl}`;
+      }
+    }
+  },
   watch: {
     amount: function (newValue) {
       const result = newValue.replace(/\D/g, '')
