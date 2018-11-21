@@ -13,6 +13,7 @@ import './theme/default.styl';
 import VeeValidate from 'vee-validate';
 import colors from 'vuetify/es5/util/colors';
 import Truncate from 'lodash.truncate';
+import  SocialSharing from 'vue-social-sharing';
 
 Parse.initialize('innstapay');
 const liveUrl = 'https://api.innstapay.com/api';
@@ -40,6 +41,7 @@ Vue.config.productionTip = false;
 // Global filters
 Vue.filter('truncate', Truncate);
 Vue.use(VeeValidate, { fieldsBagName: 'formFields' });
+Vue.use(SocialSharing);
 Vue.use(Vuetify, {
   // theme: {
   //   primary: colors.indigo.base, // #E53935

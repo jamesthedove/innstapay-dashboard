@@ -18,6 +18,65 @@
                             <v-icon color="green" x-large>check</v-icon>
                             <h3>{{completedMessage}}</h3>
                             <a target="_blank" :href="pageUrl">{{pageUrl}}</a>
+
+                            <social-sharing :url="pageUrl"
+                                            class="mt-4"
+                                            :title="description"
+                                            :description="description"
+                                            hashtags="innstapay"
+                                            inline-template>
+                                <div>
+                                    <network network="email">
+                                        <v-btn
+                                                color="blue-grey"
+                                                class="white--text"
+                                        >
+                                            Email
+                                            <v-icon right dark>fa fa-envelope</v-icon>
+                                        </v-btn>
+                                    </network>
+                                    <network network="facebook">
+                                        <v-btn
+                                                color="blue"
+                                                class="white--text"
+                                        >
+                                            Facebook
+                                            <v-icon right dark>fab fa-facebook-f</v-icon>
+                                        </v-btn>
+                                    </network>
+                                    <network network="telegram">
+                                        <v-btn
+                                                color="blue"
+                                                class="white--text"
+                                        >
+                                            Telegram
+                                            <v-icon right dark>fab fa-telegram</v-icon>
+                                        </v-btn>
+
+                                    </network>
+                                    <network network="twitter">
+                                        <v-btn
+                                                color="blue"
+                                                class="white--text"
+                                        >
+                                            Twitter
+                                            <v-icon right dark>fab fa-twitter</v-icon>
+                                        </v-btn>
+                                    </network>
+                                    <network network="whatsapp">
+                                        <v-btn
+                                                color="green"
+                                                class="white--text"
+                                        >
+                                            WhatsApp
+                                            <v-icon right dark>fab fa-whatsapp</v-icon>
+                                        </v-btn>
+
+
+                                    </network>
+                                </div>
+                            </social-sharing>
+
                         </v-flex>
 
                 </template>
