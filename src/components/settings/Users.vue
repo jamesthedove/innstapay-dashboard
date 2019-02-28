@@ -69,9 +69,11 @@ export default {
     const users = await business.getUsers();
     users.forEach((businessUser) => {
       const user = businessUser.get('publicUser');
-      businessUser.name = user.get('name');
-      businessUser.email = user.get('email');
-      businessUser.role = businessUser.get('role');
+      if (user) {
+        businessUser.name = user.get('name');
+        businessUser.email = user.get('email');
+        businessUser.role = businessUser.get('role');
+      }
     });
     this.users = users;
   },
