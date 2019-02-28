@@ -17,7 +17,7 @@
                     <v-form ref="form">
                     <v-layout wrap>
                         <v-flex xs12>
-                            <v-text-field :rules="emailRules" v-model="email" label="Email"></v-text-field>
+                            <v-text-field type="email" :rules="emailRules" v-model="email" label="Email"></v-text-field>
                         </v-flex>
                         <v-flex xs12>
                             <v-select :rules="roleRules" label="Role" :items="roles" v-model="role"></v-select>

@@ -30,7 +30,7 @@ if (hostname === 'dashboard.innstapay.com') {
   Parse.checkoutURL = 'https://checkout-test.innstapay.com/pay/';
 } else {
   Parse.checkoutURL = 'https://checkout-test.innstapay.com/pay/';
-  Parse.serverURL = testUrl;
+  Parse.serverURL = localUrl;
 }
 
 Parse.Object.registerSubclass('Business', Business);
