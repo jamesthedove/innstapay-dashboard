@@ -74,9 +74,10 @@ export default {
       if (this.amount) {
         this.loading = true;
         const amount = parseFloat(this.amount.replace(/,/g, ''));
+        const publicKey = Parse.serverURL.indexOf('test') > 0 ? 'pk_test_b61dc1b3i7938-45b1-89e0-bab1002dda56' : 'pk_8a624b1c-d553-44f4-a5be-47219e45257e';
         Innstapay.showPaymentDialog({
           amount: amount,
-          key: 'pk_8a624b1c-d553-44f4-a5be-47219e45257e', // innstapay business public key
+          key: publicKey, // innstapay business public key
           customer: {
             email: Util.getCurrentUser().getEmail() // user email
           },
